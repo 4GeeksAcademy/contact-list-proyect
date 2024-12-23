@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import getState from "./flux.js";
+import Todos from "../views/Todos.jsx";
 
 // Don't change, here is where we initialize our context, by default it's just going to be null.
 export const Context = React.createContext(null);
@@ -31,6 +32,14 @@ const injectContext = PassedComponent => {
 			 * state.actions.loadSomeData(); <---- calling this function from the flux.js actions
 			 *
 			 **/
+
+			// PARA LLAMAR FUNCIONES QUE SE CARGEN EN LA APP EN GENERAL Y AL INSTANTE...
+			// COMO EN ESTE CASO QUE INTENTO LLAMAR A LA FUNCION getAllTask de mi archivo 
+			// Todos.jsx pues la llamo desde aqui 
+
+			// Desde el archivo que sea (?)
+			state.actions.getAllTask()
+			state.actions.getAllCharacter()
 		}, []);
 
 		// The initial value for the context is not null anymore, but the current state of this component,
