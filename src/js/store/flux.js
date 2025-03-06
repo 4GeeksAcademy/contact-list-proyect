@@ -1,42 +1,28 @@
 
-// getStore => Devuelve el objeto Store   // Por ejm: para llegar a urlBase usamos getStore
-// getActions => Devuelve todas las acciones para usarlas // Por ejm: Modificar estados ?
-// setStore  => Unica foram de  modificar el store  (Recibe un objeto con el nuevo Store)
-
-// Hasta ahora de alguna forma Context, su valor es toda esta funcion o.O
  const getState = ({ getStore, getActions, setStore }) => {
 	return {
-		// Store es un objeto que puede recibir cualquier tipo de key , keys con arrays y objetos o 
-		// simplemente keys con valores )?
 		store: {
 			user: "ricardou",
 			urlBaseTodos: "https://playground.4geeks.com/todo",
 			urlBaseRick: "https://rickandmortyapi.com/api",
 			todos: [],
 			products: JSON.parse(localStorage.getItem("products")) || [],
-			cart: JSON.parse(localStorage.getItem("cart")) || [], // Solo esta línea es necesaria
+			cart: JSON.parse(localStorage.getItem("cart")) || [], 
 		  },
 		actions: {
-			// En esta funcion hacemos todo lo necesario para modificar mi Key Todos de Store
-			// Y asi evita tengamos que modificarla en un tal componente por separado
 			getAllTask: async () => {
 				try {
-					// Ves como para acceder mencionar a un key de mi Store tengo que decir 
-					// getStore(), luego esto lo simplificamos 
 					const response = await fetch(`${getStore().urlBaseTodos}/users/ricardou`)
 					const data = await response.json()
-					// En este momento data seria toda la info de tal usuario como su name, todos, etc 
-					// En este caso data tiene 2 objetos, el name y el todo de tal usuario
+					
 					console.log(data);
 
-					
 					if (response.ok) {
 						setStore({
-							// Aca agregamos escribiendo lo que queremos modificar como "todos"
-							// Luego queremos acceder al segundo objeto de "Data`"
-							todos: data.todos || []  // Asegura que "todos" siempre sea un array
+							
+							todos: data.todos || [] 
 						});
-					} //Aqui un Else creando el nuevo USUARIO ??????
+					} 
 				} catch (error) {
 					console.log(error);
 				}
@@ -47,11 +33,8 @@
 					const response = await fetch(`${store.urlBaseTodos}/users/ricardou`, {
 						method: "POST"
 					})
-					// Si la respuesta fue buena quiero usar una accion con getActions y la acccion que eligo 
-					// para ejecutar es getAllTask
+					
 					if (response.ok) {
-						// La unica forma de usar un objeto de ACTIONS, dentro de un objeto ACTIONS es 
-						// con getActions()
 						getActions().getAllTask()
 					} 
 		
@@ -59,7 +42,6 @@
 					console.log(error)
 				}
 			},
-			// En parametros pondremos la tarea que vamos a guardar )?
 			addTask : async (task) => {
 				const store = getStore()
 				try {
@@ -88,9 +70,7 @@
 					});
 					if (response.ok) {
 						getActions().getAllTask()
-						// Backup Usalo en emergencia 
-						// Filtrar la tarea eliminada del estado local (taskList)
-						// setTaskList(taskList.filter((item) => item.id !== id));
+						
 					}
 				} catch (error) {
 					console.log(error);
@@ -110,7 +90,6 @@
 						})
 					});
 					if (response.ok) {
-						// Actualizar taskList después de editar
 						getActions().getAllTask()
 					}
 				} catch (error) {
@@ -120,10 +99,9 @@
 			getAllCharacter: async () => {
 				const store = getStore();
 			
-				// Verifica si los productos ya están almacenados en el localStorage
 				if (localStorage.getItem("products")) {
 					console.log("Se usa el almacenamiento de localStorage");
-					console.log(JSON.parse(localStorage.getItem("products"))); // Mostrar los productos en consola
+					console.log(JSON.parse(localStorage.getItem("products"))); 
 					setStore({
 						products: JSON.parse(localStorage.getItem("products"))
 					});

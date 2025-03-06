@@ -32,12 +32,6 @@ const injectContext = PassedComponent => {
 			 * state.actions.loadSomeData(); <---- calling this function from the flux.js actions
 			 *
 			 **/
-
-			// PARA LLAMAR FUNCIONES QUE SE CARGEN EN LA APP EN GENERAL Y AL INSTANTE...
-			// COMO EN ESTE CASO QUE INTENTO LLAMAR A LA FUNCION getAllTask de mi archivo 
-			// Todos.jsx pues la llamo desde aqui 
-
-			// Desde el archivo que sea (?)
 			state.actions.getAllTask()
 			state.actions.getAllCharacter()
 		}, []);

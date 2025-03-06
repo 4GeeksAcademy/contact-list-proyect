@@ -1,4 +1,4 @@
-// Para usar la Store Global importa el useContext para usar Context
+
 import React, { useEffect, useState, useContext } from "react";
 import { Context } from "../store/appContext";
 
@@ -17,12 +17,12 @@ const Todos = () => {
 
     const { store, actions } = useContext(Context);
 
-    // Sincronizar taskList con el store global
+   
     useEffect(() => {
-        setTaskList(store.todos); // Sincroniza taskList con el estado global de todos
-    }, [store.todos]); // Este efecto se ejecuta cuando store.todos cambia
+        setTaskList(store.todos); 
+    }, [store.todos]); 
 
-    // Función para manejar el cambio en el input
+    
     const handleChange = ({ target }) => {
         setTask({
             ...task,
@@ -30,28 +30,27 @@ const Todos = () => {
         });
     };
 
-    // Agregar una nueva tarea
+   
     const addTask = async (event) => {
         if (event.key === "Enter") {
-            // como el addTask del archivo flux retorna almenos un true puedo resasignar 
-            // result = ... 
+            
             const result = await actions.addTask(task);
             if (result) {
                 setTask(initialTask)
             }
 
-            // setTask(initialTask); // Limpiar el input después de agregar
+           
         }
     };
 
-    // Eliminar una tarea
+    
     const deleteTask = async (id) => {
         try {
             const response = await fetch(`${urlBase}/todos/${id}`, {
                 method: "DELETE"
             });
             if (response.ok) {
-                // Filtrar la tarea eliminada del estado local (taskList)
+                
                 setTaskList(taskList.filter((item) => item.id !== id));
             }
         } catch (error) {
@@ -73,7 +72,7 @@ const Todos = () => {
                 })
             });
             if (response.ok) {
-                // Actualizar taskList después de editar
+                
                 setTaskList(
                     taskList.map((task) =>
                         task.id === item.id ? { ...task, is_done: !task.is_done } : task

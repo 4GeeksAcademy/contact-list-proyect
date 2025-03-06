@@ -8,7 +8,6 @@ import { Single } from "./views/single";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
-import { Footer } from "./component/footer";
 import Todos from "./views/Todos.jsx";
 import RickAndMorty from "./views/RickAndMorty.jsx"
 
@@ -31,7 +30,6 @@ const Layout = () => {
 						<Route path="/rick-and-morty" element={<RickAndMorty/>} />
 						<Route path="*" element={<h1>Not found!</h1>} />
 					</Routes>
-					<Footer />
 				</ScrollToTop>
 			</BrowserRouter>
 		</div>
